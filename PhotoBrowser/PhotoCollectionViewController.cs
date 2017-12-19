@@ -12,15 +12,14 @@ namespace PhotoBrowser
     {
         private List<UIImage> _images;
 
-        public PhotoCollectionViewController (IntPtr handle) : base (handle)
+        public PhotoCollectionViewController(UICollectionViewFlowLayout layout) : base(layout)
         {
+
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            CollectionView.CollectionViewLayout = new PhotoLayout(View.Frame.Width / 4 - 10);
 
             _images = new List<UIImage>
             {
@@ -51,7 +50,8 @@ namespace PhotoBrowser
 
             var image = _images.ElementAt(indexPath.Row);
 
-            var imageButton = cell.ViewWithTag(100) as UIButton;
+            var imageButton = new UIButton(new CGRect(0,0,View.Window.Frame.Width / 4 - 10,View.Window.Frame.Width / 4 - 10));
+            cell.AddSubview(imageButton);
             imageButton.SetBackgroundImage(image, UIControlState.Normal);
 
             imageButton.TouchUpInside += (sender, e) => 
@@ -92,6 +92,7 @@ namespace PhotoBrowser
         public PhotoLayout(nfloat width)
         {
             this.ItemSize = new CGSize(width, width);
+            this.SectionInset = new UIEdgeInsets(0, 0, 0, 0);
         }
     }
 }

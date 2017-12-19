@@ -21,6 +21,21 @@ namespace PhotoBrowser
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
 
+            // create a new window instance based on the screen size
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var layout = new PhotoLayout(Window.Frame.Width / 4 - 10);
+
+            var controller = new PhotoCollectionViewController(layout);
+            controller.CollectionView.RegisterClassForCell(typeof(UICollectionViewCell), "photoViewCell");
+            controller.CollectionView.BackgroundColor = UIColor.Black;
+
+
+            Window.RootViewController = controller;
+
+            // make the window visible
+            Window.MakeKeyAndVisible();
+
             return true;
         }
 
