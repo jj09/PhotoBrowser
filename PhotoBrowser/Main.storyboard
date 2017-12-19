@@ -27,10 +27,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="821" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" tag="100">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3241" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" tag="100">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
+                                            <color key="tintColor" colorSpace="calibratedWhite" white="0" alpha="0"/>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="1"/>

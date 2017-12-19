@@ -49,12 +49,37 @@ namespace PhotoBrowser
         {
             var cell = collectionView.DequeueReusableCell("photoViewCell", indexPath) as UICollectionViewCell;
 
-            var imageView = cell.ViewWithTag(100) as UIImageView;
+            var image = _images.ElementAt(indexPath.Row);
 
-            imageView.Image = _images.ElementAt(indexPath.Row);
+            var imageButton = cell.ViewWithTag(100) as UIButton;
+            imageButton.SetBackgroundImage(image, UIControlState.Normal);
+
+            imageButton.TouchUpInside += (sender, e) => 
+            {
+                var previewViewController = new UIViewController();
+
+                // TODO: adjust width/heigh based on image
+                var imageView = new UIImageView(new CGRect(0, 0, View.Frame.Width, View.Frame.Height))
+                {
+                    Image = image
+                };
+
+                previewViewController.View.AddSubview(imageView);
+
+                var closeButton = new UIButton(new CGRect(View.Frame.Width - 40, 20, 20, 20));
+                closeButton.SetTitle("X", UIControlState.Normal);
+                closeButton.AccessibilityLabel = "close";
+                closeButton.TouchUpInside += (s, evt) => {
+                    previewViewController.DismissViewController(true, null);
+                };
+
+                previewViewController.View.AddSubview(closeButton);
+
+                this.ShowViewController(previewViewController, null);
+            };
 
             cell.IsAccessibilityElement = true;
-            cell.AccessibilityLabel = "this is Saqib";
+            cell.AccessibilityLabel = "image description";
 
             return cell;
         }
@@ -66,7 +91,7 @@ namespace PhotoBrowser
     {
         public PhotoLayout(nfloat width)
         {
-            ItemSize = new CGSize(width, width);
+            this.ItemSize = new CGSize(width, width);
         }
     }
 }
