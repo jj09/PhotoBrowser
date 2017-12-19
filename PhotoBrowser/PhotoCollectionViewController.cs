@@ -12,9 +12,10 @@ namespace PhotoBrowser
     {
         private List<UIImage> _images;
 
-        public PhotoCollectionViewController(UICollectionViewFlowLayout layout) : base(layout)
+        public PhotoCollectionViewController() : base(new PhotoLayout(UIScreen.MainScreen.Bounds.Width / 4 - 10))
         {
-
+            CollectionView.RegisterClassForCell(typeof(UICollectionViewCell), "photoViewCell");
+            CollectionView.BackgroundColor = UIColor.Black;
         }
 
         public override void ViewDidLoad()
