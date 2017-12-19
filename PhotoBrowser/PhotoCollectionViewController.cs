@@ -79,7 +79,7 @@ namespace PhotoBrowser
             };
 
             cell.IsAccessibilityElement = true;
-            cell.AccessibilityLabel = "image description";
+            cell.AccessibilityLabel = $"image {indexPath.Row}";
 
             return cell;
         }
