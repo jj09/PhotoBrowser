@@ -3,6 +3,8 @@ using System;
 using UIKit;
 using System.Collections.Generic;
 using System.Linq;
+using CoreGraphics;
+using CoreAnimation;
 
 namespace PhotoBrowser
 {
@@ -17,6 +19,8 @@ namespace PhotoBrowser
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            CollectionView.CollectionViewLayout = new PhotoLayout(View.Frame.Width / 4 - 10);
 
             _images = new List<UIImage>
             {
@@ -48,18 +52,21 @@ namespace PhotoBrowser
             var imageView = cell.ViewWithTag(100) as UIImageView;
 
             imageView.Image = _images.ElementAt(indexPath.Row);
-            //imageView.AccessibilityLabel = "Description of image";
 
             cell.IsAccessibilityElement = true;
             cell.AccessibilityLabel = "this is Saqib";
 
             return cell;
         }
+    }
 
-        public override CoreGraphics.CGSize GetSizeForChildContentContainer(IUIContentContainer contentContainer, CoreGraphics.CGSize parentContainerSize)
+    // https://developer.xamarin.com/guides/ios/user_interface/controls/uicollectionview/
+    // https://forums.xamarin.com/discussion/72296/collectionview-cell-width-is-not-changing-on-different-screen-sizes
+    public class PhotoLayout : UICollectionViewFlowLayout
+    {
+        public PhotoLayout(nfloat width)
         {
-            nfloat size = View.Frame.Width / 4 - 60;
-            return new CoreGraphics.CGSize(size, size);
+            ItemSize = new CGSize(width, width);
         }
     }
 }
